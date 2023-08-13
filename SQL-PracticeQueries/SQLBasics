@@ -1,1 +1,136 @@
+/*
+Creating Table and Inserting Data into Tables
+*/
+
+Create Table EmployeeDemographics
+(EmployeeID int,
+FirstName varchar(50),
+LastName varchar(50),
+Age int,
+Gender varchar (50)
+)
+
+
+Create Table EmployeeSalary
+(EmployeeID int,
+JobTitle varchar(50),
+Salary int)
+
+
+
+--Inserting Data into table
+
+INSERT INTO EmployeeDemographics Values
+	(1001, 'Jim', 'Halpert', 30, 'Male'),
+	(1001, 'Jim', 'Halpert', 30, 'Male'),
+(1002, 'Pam', 'Beasley', 30, 'Female'),
+(1003, 'Dwight', 'Schrute', 29, 'Male'),
+(1004, 'Angela', 'Martin', 31, 'Female'),
+(1005, 'Toby', 'Flenderson', 32, 'Male'),
+(1006, 'Michael', 'Scott', 35, 'Male'),
+(1007, 'Meredith', 'Palmer', 32, 'Female'),
+(1008, 'Stanley', 'Hudson', 38, 'Male'),
+(1009, 'Kevin', 'Malone', 31, 'Male')
+
+---Removing Duplicate
+
+--With CTE as (Select *,
+--	Row_number() over 
+--	(Partition by EmployeeID
+--	order by EmployeeID) as duplicate
+--FROM EmployeeDemographics
+--)
+--DELETE 
+--From CTE
+--Where duplicate>1
+
+--Select *
+--from EmployeeDemographics
+
+Insert Into EmployeeSalary VALUES
+(1001, 'Salesman', 45000),
+(1002, 'Receptionist', 36000),
+(1003, 'Salesman', 63000),
+(1004, 'Accountant', 47000),
+(1005, 'HR', 50000),
+(1006, 'Regional Manager', 65000),
+(1007, 'Supplier Relations', 41000),
+(1008, 'Salesman', 48000),
+(1009, 'Accountant', 42000)
+
+
+/*
+Select Statement
+Top, Distinct, Count, As, Max , Min, Avg
+*/
+
+Select Top 5*
+From EmployeeDemographics
+
+Select Distinct(EmployeeID)
+From EmployeeDemographics
+
+Select Count(*)
+From EmployeeDemographics
+
+Select Max(Salary) As MaximumSalary
+From EmployeeSalary
+
+
+/*
+
+Where Statement
+=, <>, <, >, And, Or, Like, Null, Not NUll, In, Between
+
+*/
+
+Select*
+From EmployeeDemographics
+Where Age >= 30
+
+--Both Criteria should be met
+Select*
+From EmployeeDemographics
+Where Age >30 And Gender='Female'
+
+--Any in Criteria should be met
+Select*
+From EmployeeDemographics
+Where Age =30 Or Gender='Female'
+
+Select *
+From EmployeeDemographics
+--Where LastName Like '%S%'
+--Where LastName Like 'S___%'
+Where LastName not Like '[hm]%'
+
+Select*
+From EmployeeDemographics
+Where Age is not Null
+
+Select*
+From EmployeeDemographics
+Where FirstName In ('Jim', 'Pam')
+
+Select*
+From EmployeeDemographics
+Where Age Between 31 And 35
+
+
+
+/* 
+
+Group By, Order By
+
+*/
+
+Select*
+From EmployeeDemographics
+Order by Age Desc
+
+Select Gender, Count(Gender)
+From EmployeeDemographics
+Where Age >30
+Group by Gender
+
 
